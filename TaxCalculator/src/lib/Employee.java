@@ -16,11 +16,11 @@ private String address;
 private int yearJoined;
 private int monthJoined;
 private int dayJoined;
-private Month monthWorkingInYear;
+private int monthWorkingInYear;
 /**Penggunaan tipe data interger pada monthWorkingInYear, 
  * diganti menggunakan tipe data enum  */
 private boolean isForeigner;
-private Gender gender;
+private boolean gender;
 /**Penggunaan tipe data boolean untuk menyimpan informasi gender pada int gender, 
  * diganti menggunakan tipe data enum  */
 private int monthlySalary;
@@ -33,7 +33,7 @@ private String spouseIdNumber;
 	private List<String> childNames;
 	private List<String> childIdNumbers;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, Gender gender) {
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
 	this.employeeId = employeeId;
 	this.firstName = firstName;
 	this.lastName = lastName;
