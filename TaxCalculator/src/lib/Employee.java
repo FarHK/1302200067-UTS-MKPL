@@ -75,15 +75,15 @@ private String spouseIdNumber;
 	
 	public void setAnnualDeductible(int deductible) {	
 		this.annualDeductible = deductible;
-	}
-	
+}
+
 	public void setAdditionalIncome(int income) {	
 		this.otherMonthlyIncome = income;
-	}
-	
+}
+
 	public void setSpouse(String spouseName, String spouseIdNumber) {
 		this.spouseName = spouseName;
-		this.spouseIdNumber = idNumber;
+		this.spouseIdNumber = spouseIdNumber;
 	}
 	
 	public void addChild(String childName, String childIdNumber) {
