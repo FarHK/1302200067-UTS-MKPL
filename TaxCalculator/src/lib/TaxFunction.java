@@ -18,30 +18,29 @@ public class TaxFunction {
 	 */
 	
 	
-	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
-		
-		int tax = 0;
-		
-		if (numberOfMonthWorking > 12) {
-			System.err.println("More than 12 month working per year");
-		}
-		
-		if (numberOfChildren > 3) {
-			numberOfChildren = 3;
-		}
-		
-		if (isMarried) {
-			tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - (54000000 + 4500000 + (numberOfChildren * 1500000))));
-		}else {
-			tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - 54000000));
-		}
-		
-		if (tax < 0) {
-			return 0;
-		}else {
-			return tax;
-		}
-			 
-	}
-	
+	 public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthsWorking, int deductible, boolean isMarried, int numberOfChildren) {
+        if (numberOfMonthsWorking > 12) {
+            throw new IllegalArgumentException("Number of working months cannot exceed 12.");
+        }
+
+        int taxExemption = calculateTaxExemption(isMarried, numberOfChildren);
+        int taxableIncome = calculateTaxableIncome(monthlySalary, otherMonthlyIncome, numberOfMonthsWorking, deductible, taxExemption);
+        int tax = (int) Math.round(0.05 * taxableIncome);
+
+        return tax < 0 ? 0 : tax;
+    }
+
+    private static int calculateTaxableIncome(int monthlySalary, int otherMonthlyIncome, int numberOfMonthsWorking, int deductible, int taxExemption) {
+        int taxableMonthlyIncome = monthlySalary + otherMonthlyIncome - deductible;
+        int totalTaxableIncome = taxableMonthlyIncome * numberOfMonthsWorking - taxExemption;
+
+        return totalTaxableIncome < 0 ? 0 : totalTaxableIncome;
+    }
+
+    private static int calculateTaxExemption(boolean isMarried, int numberOfChildren) {
+        int taxExemption = isMarried ? TAX_EXEMPTION_MARRIED : TAX_EXEMPTION_SINGLE;
+        taxExemption += numberOfChildren * TAX_EXEMPTION_CHILD;
+
+        return taxExemption;
+    }
 }
